@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <link rel="stylesheet" th:href="@{/css/style.css}" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+        <title th:text="#{web.title} + ' - ' + #{head.edit}"></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <h2 th:text="#{head.edit}"></h2>
+            </div>
+            <div class="row">
+                <a href="/" th:text="#{link.backHome}"></a>
+            </div>
+
+            <div class="row">
+                <form action="/save" method="POST">
+                    <input type="hidden" name="taskId" th:value="${taskId}" />
+                    <div class="input-main col-sm-10">
+                        <input class="form-control" name="taskName" th:value="${taskName}"
+                               th:placeholder="#{ph.editTaskInput}"/>
+                    </div>
+                    <div class="col-sm-2 fm">
+                        <button type="submit" class="btn btn-success" th:text="#{btn.txt.saveTask}"></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,74 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+    <title th:text="#{web.title} + ' - ' + #{web.title.home}"></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h2 th:text="#{head.home}"></h2>
+        </div>
+
+        <!-- Search area -->
+        <div class="row">
+            <form action="/search" method="GET">
+                <div class="col-sm-10 input-main" >
+                    <input class="form-control" name="q" th:value="${param.q != null ? param.q[0] : ''}"
+                           th:placeholder="#{ph.searchTaskInput}"/>
+                </div>
+                <div class="col-sm-2">
+                    <button class="btn btn-primary" type="submit" th:text="#{btn.txt.searchTask}"></button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Only visible when querying -->
+        <div class="row">
+            <a th:if="${param.q != null}" href="/" th:text="#{link.backHome}"></a>
+        </div>
+
+        <!-- Task list view -->
+        <div class="row">
+            <h4 th:text="${taskList.isEmpty()} ? #{msg.emptyList} : '' "></h4>
+            <table id="tbl-tasks" class="table table-striped">
+                <tr th:each="task : ${taskList}">
+                    <td><a th:href="${'/edit?taskId=' + task.taskId}" th:text="${task.taskName}"></a></td>
+                    <td class="btn-col">
+                        <form action="/mark" method="POST" >
+                            <input type="hidden" name="taskId" th:value="${task.taskId}" />
+                            <button type="submit" th:class="${task.taskStatus == T(com.taskmgmt.model.TaskStatus).COMPLETED} ? 'btn btn-success' : ' btn btn-default'" aria-label="Left Align">
+                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                            </button>
+                        </form>
+                    </td>
+                    <td class="btn-col">
+                        <form action="/delete" method="POST" >
+                            <input type="hidden" name="taskId" th:value="${task.taskId}" />
+                            <button type="submit" class="btn btn-default" aria-label="Left Align">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                <!-- New task input field -->
+                <tr th:if="${param.q == null}">
+                    <form action="/add" method="POST">
+                        <td>
+                            <input class="form-control" name="taskName" th:placeholder="#{ph.newTaskInput}"/>
+                        </td>
+                        <td class="btn-col">
+                            <button type="submit" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            </button>
+                        </td>
+                        <td class="btn-col"><!-- making the tr border consistent --></td>
+                    </form>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
