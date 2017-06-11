@@ -9,10 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.taskmgmt.model.Task;
 import com.taskmgmt.service.TaskService;
-import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 public class TaskController {
@@ -21,8 +21,8 @@ public class TaskController {
     private static final String KEY_TASK_ID    = "taskId";
     private static final String KEY_TASK_LIST  = "taskList";
     private static final String KEY_TASK_NAME  = "taskName";
-    private static final String VIEW_TASK      = "task";
     private static final String ROOT_REDIRECT  = CONST_REDIRECT + "/";
+    private static final String VIEW_TASK      = "task";
 
     private final static Logger log = LoggerFactory.getLogger(TaskController.class);
 
