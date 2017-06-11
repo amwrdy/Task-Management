@@ -59,12 +59,6 @@
 			<artifactId>hibernate4-sqlite-dialect</artifactId>
 			<version>0.1.2</version>
 		</dependency>
-		<!--
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
-        </dependency> -->
 		<!-- Dependencies for SQLite -->
 		<dependency>
 			<groupId>org.xerial</groupId>
@@ -75,7 +69,6 @@
 			<artifactId>jooq</artifactId>
 			<version>3.4.4</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
@@ -125,7 +118,6 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-
 				<configuration>
 					<excludeDevtools>false</excludeDevtools>
 				</configuration>
